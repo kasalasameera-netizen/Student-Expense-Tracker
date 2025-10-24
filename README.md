@@ -2,7 +2,7 @@
 
 A modern, responsive Single Page Application (SPA) built with React for tracking student expenses with interactive visualizations and comprehensive analytics.
 
-<img src="" alt="Main Interface" width="100%">
+<img src="Images/add-expense" alt="Main Interface" width="100%">
 
 ## 🚀 Features
 
