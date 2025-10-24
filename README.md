@@ -2,7 +2,7 @@
 
 A modern, responsive Single Page Application (SPA) built with React for tracking student expenses with interactive visualizations and comprehensive analytics.
 
-<img src="Images/add-expense" alt="Main Interface" width="100%">
+<img src="Images/add-expense.png" alt="Main Interface" width="60%">
 
 ## 🚀 Features
 
@@ -42,27 +42,21 @@ A modern, responsive Single Page Application (SPA) built with React for tracking
 ## 📊 Application Screenshots
 
 ### 1. Expense Form
-<img src="https://via.placeholder.com/600x400/36A2EB/ffffff?text=Add+New+Expense+Form" alt="Expense Form" width="600">
+<img src="Images/add-expense.png" alt="Expense Form" width="600">
 
 *Comprehensive form with validation, Indian Rupee support, and description field*
 
-### 2. Expense List & Analytics
-<img src="https://via.placeholder.com/600x300/FF6384/ffffff?text=Expense+List+with+Summary" alt="Expense List" width="600">
 
-*Real-time summary showing total expenses, item count, and top spending category*
-
-### 3. Interactive Pie Chart
-<img src="https://via.placeholder.com/500x400/FFCE56/000000?text=Expense+Distribution+Chart" alt="Pie Chart" width="500">
+### 2. Interactive Pie Chart
+<img src="Images/expense-pie-graph.png" alt="Pie Chart" width="500">
 
 *Visual breakdown of expenses by category with percentages and tooltips*
 
-### 4. Monthly Summary
-<img src="https://via.placeholder.com/600x300/4BC0C0/ffffff?text=Monthly+Breakdown" alt="Monthly Summary" width="600">
+### 3. Monthly Summary
+<img src="Images/expense-list.png" alt="Monthly Summary" width="600">
 
 *Track spending patterns across different months with detailed breakdown*
 
-### 5. Responsive Mobile View
-<img src="https://via.placeholder.com/300x600/9966FF/ffffff?text=Mobile+Responsive+Design" alt="Mobile View" width="300">
 
 *Fully responsive design optimized for mobile devices*
 
@@ -138,9 +132,6 @@ useEffect(() => {
 }, []);
 ```
 
-### Component Architecture
-<img src="https://via.placeholder.com/700x300/FF9F40/ffffff?text=Component+Architecture+Diagram" alt="Component Architecture" width="700">
-
 ```
 App (Main Container)
 ├── ExpenseForm (Add/Edit expenses with description)
@@ -163,7 +154,6 @@ App (Main Container)
 - **Mobile** - Single-column stack for mobile optimization
 
 ### Analytics Dashboard
-<img src="https://via.placeholder.com/600x200/C9CBCF/000000?text=Analytics+Dashboard" alt="Analytics Dashboard" width="600">
 
 - **Total Expenses** - Real-time sum calculation
 - **Total Items** - Count of all expense entries
@@ -287,4 +277,3 @@ This project is open source and available under the MIT License.
 - Building portfolio projects
 - Demonstrating technical skills
 
-<img src="https://via.placeholder.com/800x100/667eea/ffffff?text=Built+with+React+%7C+ES6%2B+%7C+Chart.js+%7C+Responsive+Design" alt="Technology Banner" width="100%">
