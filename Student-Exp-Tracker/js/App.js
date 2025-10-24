@@ -2,51 +2,29 @@ const { useState, useEffect } = React;
 
 const App = () => {
     const [expenses, setExpenses] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [editingExpense, setEditingExpense] = useState(null);
 
-    // Load expenses on component mount using async/await
     useEffect(() => {
-        loadExpenses();
+        window.mockApi.getAllExpenses().then(setExpenses);
     }, []);
 
-    const loadExpenses = async () => {
-        try {
-            setLoading(true);
-            setError('');
-            const data = await window.mockApi.getAllExpenses();
-            setExpenses(data);
-        } catch (err) {
-            setError('Failed to load expenses');
-            console.error('Error loading expenses:', err);
-        } finally {
-            setLoading(false);
-        }
+    const handleAddExpense = async (expenseData) => {
+        const newExpense = await window.mockApi.addExpense(expenseData);
+        setExpenses(prev => [...prev, newExpense]);
     };
 
-    const handleAddExpense = async (expenseData) => {
-        try {
-            setLoading(true);
-            const newExpense = await window.mockApi.addExpense(expenseData);
-            setExpenses(prevExpenses => [...prevExpenses, newExpense]);
-        } catch (err) {
-            setError('Failed to add expense');
-            throw err;
-        } finally {
-            setLoading(false);
-        }
+    const handleUpdateExpense = async (id, updatedData) => {
+        const updatedExpense = await window.mockApi.updateExpense(id, updatedData);
+        setExpenses(prev => prev.map(exp => exp.id === id ? updatedExpense : exp));
     };
 
     const handleDeleteExpense = async (id) => {
-        try {
-            await window.mockApi.deleteExpense(id);
-            setExpenses(prevExpenses => 
-                prevExpenses.filter(expense => expense.id !== id)
-            );
-        } catch (err) {
-            setError('Failed to delete expense');
-            console.error('Error deleting expense:', err);
-        }
+        await window.mockApi.deleteExpense(id);
+        setExpenses(prev => prev.filter(exp => exp.id !== id));
+    };
+
+    const handleEditExpense = (expense) => {
+        setEditingExpense(expense);
     };
 
     return (
@@ -55,31 +33,29 @@ const App = () => {
                 <h1>Student Expense Tracker</h1>
                 <p>Track your daily expenses and visualize your spending patterns</p>
             </header>
-
-            {error && (
-                <div className="error" style={{ margin: '20px 30px' }}>
-                    {error}
-                </div>
-            )}
-
-            <div className="main-content">
+            <div style={{padding: '30px'}}>
                 <window.ExpenseForm 
-                    onAddExpense={handleAddExpense}
-                    loading={loading}
-                />
-                
-                <window.ExpenseList 
-                    expenses={expenses}
-                    onDeleteExpense={handleDeleteExpense}
-                    loading={loading}
+                    onAddExpense={handleAddExpense} 
+                    onUpdateExpense={handleUpdateExpense}
+                    editingExpense={editingExpense}
+                    setEditingExpense={setEditingExpense}
                 />
             </div>
-
-            <window.ExpenseChart expenses={expenses} />
+            <div style={{padding: '0 30px 30px'}}>
+                <window.ExpenseList 
+                    expenses={expenses} 
+                    onDeleteExpense={handleDeleteExpense}
+                    onEditExpense={handleEditExpense}
+                />
+            </div>
+            <div style={{padding: '0 30px 30px'}}>
+                <window.ExpenseChart expenses={expenses} />
+            </div>
+            <div style={{padding: '0 30px 30px'}}>
+                <window.MonthlySummary expenses={expenses} />
+            </div>
         </div>
     );
 };
 
-// Render the app
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+ReactDOM.render(<App />, document.getElementById('root'));
